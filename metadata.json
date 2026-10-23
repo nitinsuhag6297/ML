@@ -1,0 +1,8 @@
+{
+  "name": "Remix LoanAI - Smart Loan Eligibility \u0026 Risk Prediction",
+  "description": "Premium Indian digital banking platform for real-time loan eligibility assessment, ML default risk prediction, bank comparison, and EMI calculation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

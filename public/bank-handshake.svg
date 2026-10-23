@@ -1,0 +1,95 @@
+<svg width="480" height="360" viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0FDF4" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#F0F9FF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FAF5FF" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D9488"/>
+      <stop offset="100%" stop-color="#115E59"/>
+    </linearGradient>
+    <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3E62"/>
+      <stop offset="100%" stop-color="#0B192C"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient Card Background -->
+  <rect x="15" y="15" width="450" height="330" rx="32" fill="url(#bgGrad)" stroke="#E2E8F0" stroke-width="2" filter="url(#softShadow)"/>
+
+  <!-- Bank Building in soft background -->
+  <g opacity="0.35" transform="translate(40, -10)">
+    <path d="M140 85 L200 48 L260 85 Z" fill="#C7D2FE" stroke="#4338CA" stroke-width="2.5" />
+    <rect x="145" y="85" width="110" height="7" rx="2" fill="#A5B4FC" />
+    <rect x="156" y="92" width="12" height="42" rx="2" fill="#BAE6FD" stroke="#0284C7" stroke-width="1.8" />
+    <rect x="180" y="92" width="12" height="42" rx="2" fill="#BAE6FD" stroke="#0284C7" stroke-width="1.8" />
+    <rect x="208" y="92" width="12" height="42" rx="2" fill="#BAE6FD" stroke="#0284C7" stroke-width="1.8" />
+    <rect x="232" y="92" width="12" height="42" rx="2" fill="#BAE6FD" stroke="#0284C7" stroke-width="1.8" />
+    <rect x="142" y="134" width="116" height="8" rx="2" fill="#CBD5E1" stroke="#475569" stroke-width="2" />
+  </g>
+
+  <!-- Floating Golden Rupee Coins & Sparkles -->
+  <g>
+    <!-- Left Coin -->
+    <circle cx="85" cy="85" r="22" fill="#FEF08A" stroke="#CA8A04" stroke-width="3" />
+    <circle cx="85" cy="85" r="17" fill="#FDE047" stroke="#EAB308" stroke-width="1.5" stroke-dasharray="3 3" />
+    <text x="85" y="93" text-anchor="middle" font-size="22" font-weight="bold" fill="#854D0E" font-family="sans-serif">₹</text>
+
+    <!-- Right Coin -->
+    <circle cx="395" cy="115" r="18" fill="#FEF08A" stroke="#CA8A04" stroke-width="2.5" />
+    <circle cx="395" cy="115" r="14" fill="#FDE047" stroke="#EAB308" stroke-width="1" stroke-dasharray="2 2" />
+    <text x="395" y="122" text-anchor="middle" font-size="18" font-weight="bold" fill="#854D0E" font-family="sans-serif">₹</text>
+
+    <!-- Little floating coins -->
+    <circle cx="120" cy="50" r="10" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.5" />
+    <text x="120" y="54" text-anchor="middle" font-size="10" font-weight="bold" fill="#854D0E">₹</text>
+
+    <!-- Sparkles -->
+    <path d="M75 45 L78 53 L86 56 L78 59 L75 67 L72 59 L64 56 L72 53 Z" fill="#F59E0B" />
+    <path d="M410 65 L412 71 L418 73 L412 75 L410 81 L408 75 L402 73 L408 71 Z" fill="#14B8A6" />
+    <path d="M360 40 L362 44 L366 45 L362 46 L360 50 L358 46 L354 45 L358 44 Z" fill="#6366F1" />
+  </g>
+
+  <!-- Bank Handshake Focal Centerpiece -->
+  <g transform="translate(65, 80)">
+    <!-- Left Sleeve (Borrower - Teal Suit) -->
+    <path d="M25 135 L85 102 C96 96 108 99 116 108 L136 128 L108 162 L40 174 Z"
+          fill="url(#tealGrad)" stroke="#115E59" stroke-width="4" stroke-linejoin="round" />
+    <rect x="74" y="93" width="14" height="48" rx="4" fill="#99F6E4" stroke="#0D9488" stroke-width="2.5" transform="rotate(-30 74 93)" />
+    <!-- Left Hand & Thumb -->
+    <path d="M116 108 L158 130 C165 134 167 143 162 150 L155 159 C150 166 141 168 134 163 L108 147 Z"
+          fill="#FED7AA" stroke="#EA580C" stroke-width="3.5" stroke-linejoin="round" />
+
+    <!-- Right Sleeve (Bank Underwriter - Navy Blue Suit) -->
+    <path d="M325 135 L265 102 C254 96 242 99 234 108 L214 128 L242 162 L310 174 Z"
+          fill="url(#navyGrad)" stroke="#0B192C" stroke-width="4" stroke-linejoin="round" />
+    <rect x="262" y="87" width="14" height="48" rx="4" fill="#BAE6FD" stroke="#0284C7" stroke-width="2.5" transform="rotate(30 262 87)" />
+    <!-- Right Hand Clasp -->
+    <path d="M234 108 L192 130 C185 134 183 143 188 150 L195 159 C200 166 209 168 216 163 L242 147 Z"
+          fill="#FDBA74" stroke="#EA580C" stroke-width="3.5" stroke-linejoin="round" />
+
+    <!-- Interlocked Clasped Hands -->
+    <path d="M152 126 C163 120 180 120 191 126 C200 133 200 146 191 153 C180 162 163 162 152 153 C144 146 144 133 152 126 Z"
+          fill="#FFEDD5" stroke="#EA580C" stroke-width="3.5" />
+    <path d="M160 135 L184 135" stroke="#EA580C" stroke-width="3" stroke-linecap="round" />
+    <path d="M158 143 L186 143" stroke="#EA580C" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Rosette Trust Seal Floating Above -->
+    <circle cx="175" cy="85" r="26" fill="#FFFFFF" stroke="#10B981" stroke-width="3" />
+    <path d="M175 75 C170 70 162 71 162 78 C162 87 175 94 175 94 C175 94 188 87 188 78 C188 71 180 70 175 75 Z" fill="#10B981" />
+  </g>
+
+  <!-- Bottom Authentic Sanction Badge -->
+  <g transform="translate(145, 292)">
+    <rect x="0" y="0" width="190" height="34" rx="17" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.8" filter="url(#softShadow)"/>
+    <circle cx="20" cy="17" r="7" fill="#10B981" />
+    <path d="M17 17 L19 19 L23 15" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="34" y="22" font-size="12" font-weight="bold" fill="#0F172A" font-family="sans-serif">
+      Institutional Bank Match
+    </text>
+  </g>
+</svg>

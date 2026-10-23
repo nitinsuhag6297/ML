@@ -1,0 +1,161 @@
+/* static/css/style.css - LoanAI Custom Fintech Styling */
+:root {
+  --navy: #0B192C;
+  --navy-light: #1E3E62;
+  --teal: #008080;
+  --teal-accent: #00B4D8;
+  --teal-light: #99f6e4;
+  --bg-slate: #FAF5FF;
+
+  /* Playful Pastel Palette */
+  --pastel-lavender: #EDE9FE;
+  --pastel-lavender-border: #DDD6FE;
+  --pastel-sky: #E0F2FE;
+  --pastel-sky-border: #BAE6FD;
+  --pastel-mint: #D1FAE5;
+  --pastel-mint-border: #A7F3D0;
+  --pastel-peach: #FFEDD5;
+  --pastel-peach-border: #FED7AA;
+  --pastel-yellow: #FEF9C3;
+  --pastel-yellow-border: #FEF08A;
+  --pastel-coral: #FFE4E6;
+  --pastel-coral-border: #FECDD3;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #fdfcff;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.text-navy {
+  color: var(--navy);
+}
+
+.bg-navy {
+  background-color: var(--navy);
+}
+
+.text-teal {
+  color: var(--teal);
+}
+
+.text-teal-light {
+  color: var(--teal-light);
+}
+
+.bg-teal {
+  background-color: var(--teal);
+  color: white;
+}
+
+.bg-teal-subtle {
+  background-color: rgba(0, 128, 128, 0.12);
+  color: var(--teal);
+}
+
+.bg-pastel-lavender {
+  background-color: var(--pastel-lavender);
+  border: 1px solid var(--pastel-lavender-border);
+}
+
+.bg-pastel-sky {
+  background-color: var(--pastel-sky);
+  border: 1px solid var(--pastel-sky-border);
+}
+
+.bg-pastel-mint {
+  background-color: var(--pastel-mint);
+  border: 1px solid var(--pastel-mint-border);
+}
+
+.bg-pastel-peach {
+  background-color: var(--pastel-peach);
+  border: 1px solid var(--pastel-peach-border);
+}
+
+.bg-pastel-yellow {
+  background-color: var(--pastel-yellow);
+  border: 1px solid var(--pastel-yellow-border);
+}
+
+.btn-teal-primary {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, var(--teal) 100%);
+  color: white;
+  border: none;
+  transition: all 0.2s ease;
+  border-radius: 12px;
+}
+
+.btn-teal-primary:hover {
+  opacity: 0.95;
+  color: white;
+  box-shadow: 0 4px 14px rgba(0, 128, 128, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-navy {
+  background-color: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.btn-navy:hover {
+  background-color: var(--navy-light);
+  color: white;
+}
+
+.btn-outline-navy {
+  border: 1.5px solid var(--navy-light);
+  color: var(--navy);
+  border-radius: 12px;
+}
+
+.btn-outline-navy:hover {
+  background-color: var(--navy);
+  color: white;
+}
+
+.brand-logo-mark {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.brand-title {
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  color: var(--navy);
+}
+
+.hero-section {
+  background: linear-gradient(180deg, #F5F3FF 0%, #F0F9FF 50%, #FAF5FF 100%);
+}
+
+.card {
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shadow-xs {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-2xs {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LoanAI — Smart Loan Eligibility & Risk Prediction System</title>
+  <meta name="description" content="Indian digital banking platform for real-time loan eligibility checking and Scikit-learn default risk prediction." />
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Custom Fintech Stylesheet -->
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+  <!-- Top Sticky Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top py-3 shadow-xs">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#overview">
+        <div class="brand-logo-mark p-1 rounded-3 bg-pastel-lavender">
+          <svg viewBox="0 0 100 100" class="brand-svg">
+            <polygon points="50,12 85,32 85,72 50,92 15,72 15,32" stroke="#00B4D8" stroke-width="4" fill="#0B192C" />
+            <path d="M50 28 L72 65 L28 65 Z" stroke="#38BDF8" stroke-width="3" fill="none" />
+            <circle cx="50" cy="46" r="6" fill="#10B981" />
+            <path d="M50 52 L50 78" stroke="#10B981" stroke-width="4" stroke-linecap="round" />
+          </svg>
+        </div>
+        <span class="brand-title">Loan<span class="text-teal">AI</span></span>
+        <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill ms-1 d-none d-sm-inline">Fintech ML</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3 fw-bold small">
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="#overview">Overview</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="#underwriting">ML Underwriting</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="#calculator">EMI Studio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-dark" href="#banks">Compare Banks</a>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-outline-secondary btn-sm position-relative rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#historyModal" id="btnOpenHistory">
+            History <span class="badge bg-teal rounded-pill ms-1" id="historyBadge">0</span>
+          </button>
+          <button class="btn btn-teal-primary btn-sm fw-bold px-3 py-2 rounded-3" data-bs-toggle="modal" data-bs-target="#eligibilityModal">
+            Start Assessment
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Section 1: Hero Section (Pastel Lavender & Sky Blue) -->
+  <section id="overview" class="hero-section py-5 border-bottom">
+    <div class="container py-lg-4">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-white border shadow-2xs text-teal fw-bold small mb-3">
+            <span>RBI FOIR Norms</span> · <span>Scikit-Learn Classifier</span> · <span>Top 5 Indian Banks</span>
+          </div>
+          <h1 class="display-5 fw-black text-navy text-balance mb-3">
+            Smarter Loan Decisions Start Here.
+          </h1>
+          <p class="lead text-muted mb-4 fs-6">
+            A colourful, institutional-grade digital banking intelligence platform. Evaluate personal and home loan eligibility against standard RBI debt ratios, simulate default risk with supervised machine learning, and benchmark interest rates across SBI, HDFC, ICICI, Axis, and Kotak.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <button class="btn btn-teal-primary btn-lg px-4 fw-bold rounded-3" data-bs-toggle="modal" data-bs-target="#eligibilityModal">
+              Start Loan Assessment
+            </button>
+            <a class="btn btn-outline-dark btn-lg px-4 fw-bold rounded-3" href="#underwriting">
+              Explore Features ↓
+            </a>
+          </div>
+
+          <div class="row g-3 mt-4 pt-3 border-top">
+            <div class="col-4">
+              <div class="p-3 bg-white rounded-3 border shadow-2xs">
+                <h5 class="fw-black font-mono text-navy mb-0">₹50K - ₹15Cr</h5>
+                <small class="text-muted">Loan Scope</small>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-3 bg-white rounded-3 border shadow-2xs">
+                <h5 class="fw-black font-mono text-warning-emphasis mb-0">300 - 900</h5>
+                <small class="text-muted">CIBIL Spectrum</small>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-3 bg-white rounded-3 border shadow-2xs">
+                <h5 class="fw-black font-mono text-teal mb-0">8.50% p.a.</h5>
+                <small class="text-muted">Benchmark Floor</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Illustrated Credit Dossier Showcase -->
+        <div class="col-lg-5">
+          <div class="card shadow-lg border-0 rounded-4 p-4 bg-white border border-info-subtle">
+            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+              <div>
+                <h6 class="fw-bold mb-0 text-navy">LoanAI Underwriting Hub</h6>
+                <small class="text-muted">Instant Credit Appraisal & Risk Rating</small>
+              </div>
+              <span class="badge bg-success-subtle text-success fw-bold px-2 py-1">Prime Tier</span>
+            </div>
+
+            <!-- Profile Snapshot Card -->
+            <div class="p-3 rounded-3 bg-pastel-lavender mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="small fw-bold text-dark">Rahul Sharma (Salaried Corporate)</span>
+                <span class="badge bg-white text-dark border">Low Risk</span>
+              </div>
+              <div class="row g-2 small font-mono">
+                <div class="col-6">
+                  <div class="p-2 bg-white rounded-2 border">
+                    <small class="text-muted d-block">CIBIL Score</small>
+                    <strong class="text-primary">780 / 900</strong>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="p-2 bg-white rounded-2 border">
+                    <small class="text-muted d-block">Debt FOIR</small>
+                    <strong class="text-success">34.2% (Healthy)</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lender Match Snapshot -->
+            <div class="p-2.5 rounded-3 bg-pastel-mint border border-success-subtle mb-3 small d-flex justify-content-between align-items-center">
+              <div>
+                <strong>State Bank of India</strong>
+                <div class="text-muted" style="font-size: 11px;">EBLR / RLLR Benchmark</div>
+              </div>
+              <span class="font-mono fw-bold text-success">8.50% - 9.65%</span>
+            </div>
+
+            <button class="btn btn-navy w-100 fw-bold py-2 rounded-3" data-bs-toggle="modal" data-bs-target="#eligibilityModal">
+              Begin Full Underwriting Check →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Smart Underwriting & ML Risk Intelligence (Split Section: Text-Left / Interactive-Right) -->
+  <section id="underwriting" class="py-5 bg-white border-bottom">
+    <div class="container py-lg-4">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="badge bg-success-subtle text-success fw-bold uppercase mb-2">Dual Underwriting Engine</span>
+        <h2 class="fw-extrabold text-navy">RBI FOIR Framework &amp; Machine Learning</h2>
+        <p class="text-muted small">We analyze both regulatory disposable cashflow thresholds and statistical default probability.</p>
+      </div>
+
+      <div class="row g-4 align-items-center">
+        <!-- Left: Two Colorful Feature Cards -->
+        <div class="col-lg-7 space-y-3">
+          <div class="card p-4 rounded-4 border-success-subtle bg-pastel-mint mb-3 shadow-2xs">
+            <span class="badge bg-success text-white w-fit mb-2">Pillar 1: Cashflow Capacity</span>
+            <h5 class="fw-bold text-dark">Fixed Obligation to Income Ratio (FOIR)</h5>
+            <p class="text-muted small mb-3">RBI mandates keeping total monthly obligations under 45% to 65% of net income. Our engine calculates your maximum sanctioned limit based on verified income.</p>
+            <div>
+              <button class="btn btn-success btn-sm fw-bold px-3 rounded-2" data-bs-toggle="modal" data-bs-target="#eligibilityModal">
+                Check Eligibility Limits →
+              </button>
+            </div>
+          </div>
+
+          <div class="card p-4 rounded-4 border-primary-subtle bg-pastel-lavender shadow-2xs">
+            <span class="badge bg-primary text-white w-fit mb-2">Pillar 2: Statistical Risk</span>
+            <h5 class="fw-bold text-dark">Scikit-Learn ML Risk Predictor</h5>
+            <p class="text-muted small mb-3">A calibrated supervised classification model evaluating Probability of Default (PD) with SHAP-inspired factor importance across income, credit vintage, and debt.</p>
+            <div>
+              <button class="btn btn-primary btn-sm fw-bold px-3 rounded-2" data-bs-toggle="modal" data-bs-target="#riskModal">
+                Run Risk Predictor →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Bureau Score Tester -->
+        <div class="col-lg-5">
+          <div class="card p-4 rounded-4 border-warning-subtle bg-pastel-yellow shadow-sm text-center">
+            <h6 class="fw-bold text-dark mb-1">CIBIL Bureau Score Tester</h6>
+            <small class="text-muted d-block mb-3">Simulate underwriting impact across 300 - 900</small>
+            
+            <div class="my-3">
+              <h1 class="display-4 fw-black font-mono text-dark mb-0" id="creditScoreVal">775</h1>
+              <span class="badge bg-success text-white fw-bold px-3 py-1" id="creditScoreBand">Excellent Score</span>
+            </div>
+
+            <input type="range" class="form-range my-2" min="300" max="900" value="775" id="creditScoreSlider" />
+            <div class="d-flex justify-content-between small text-muted font-mono mb-3">
+              <span>300 (Poor)</span>
+              <span>650 (Fair)</span>
+              <span>750 (Target)</span>
+              <span>900 (Top)</span>
+            </div>
+
+            <button class="btn btn-warning btn-sm fw-bold w-100 text-dark" data-bs-toggle="modal" data-bs-target="#creditModal">
+              Open Full Credit Analysis Modal →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Interactive EMI & Prepayment Studio (Primary On-Page Feature) -->
+  <section id="calculator" class="py-5 bg-light border-bottom">
+    <div class="container py-lg-4">
+      <div class="text-center max-w-700 mx-auto mb-5">
+        <span class="badge bg-warning-subtle text-warning-emphasis fw-bold uppercase mb-2">Primary Forecaster</span>
+        <h2 class="fw-extrabold text-navy">Interactive EMI &amp; Amortization Studio</h2>
+        <p class="text-muted small">Test reducing-balance loan repayments with real-time sliders and instant principal/interest calculation.</p>
+      </div>
+
+      <div class="card shadow border-0 rounded-4 p-4 p-lg-5 bg-white">
+        <div class="row g-4">
+          <div class="col-lg-7 space-y-3">
+            <div class="p-3 rounded-3 bg-pastel-yellow border border-warning-subtle mb-3">
+              <div class="d-flex justify-content-between small fw-bold mb-1">
+                <span>Loan Principal (₹)</span>
+                <span class="font-mono text-dark fw-bold" id="emiAmountDisplay">₹40,00,000</span>
+              </div>
+              <input type="range" class="form-range" min="100000" max="20000000" step="50000" value="4000000" id="emiAmountRange" />
+              <div class="d-flex justify-content-between small text-muted font-mono">
+                <span>₹1L</span>
+                <span>₹50L</span>
+                <span>₹1Cr</span>
+                <span>₹2Cr</span>
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="p-3 rounded-3 bg-pastel-sky border border-info-subtle">
+                  <div class="d-flex justify-content-between small fw-bold mb-1">
+                    <span>Interest Rate (% p.a.)</span>
+                    <span class="font-mono text-dark" id="emiRateDisplay">8.75%</span>
+                  </div>
+                  <input type="range" class="form-range" min="6.5" max="18" step="0.1" value="8.75" id="emiRateRange" />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="p-3 rounded-3 bg-pastel-lavender border border-primary-subtle">
+                  <div class="d-flex justify-content-between small fw-bold mb-1">
+                    <span>Tenure (Years)</span>
+                    <span class="font-mono text-dark" id="emiTenureDisplay">20 Years</span>
+                  </div>
+                  <input type="range" class="form-range" min="1" max="30" value="20" id="emiTenureRange" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="card p-4 bg-navy text-white rounded-4 h-100 d-flex flex-column justify-content-between">
+              <div>
+                <small class="text-teal-light uppercase fw-bold">Calculated Monthly EMI</small>
+                <h2 class="font-mono fw-black text-white mt-1" id="emiModalMonthly">₹35,348</h2>
+              </div>
+              <div class="mt-4 pt-3 border-top border-secondary small space-y-2">
+                <div class="d-flex justify-content-between">
+                  <span>Principal:</span>
+                  <strong class="font-mono text-white" id="emiModalPrincipal">₹40,00,000</strong>
+                </div>
+                <div class="d-flex justify-content-between">
+                  <span>Total Interest:</span>
+                  <strong class="font-mono text-teal-light" id="emiModalInterest">₹44,83,520</strong>
+                </div>
+                <div class="d-flex justify-content-between pt-1 border-top border-secondary">
+                  <span>Total Repayment:</span>
+                  <strong class="font-mono text-white" id="emiModalTotal">₹84,83,520</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Indian Banks Showcase (Horizontal Bank Cards with Authentic Illustrated Badges) -->
+  <section id="banks" class="py-5 bg-white border-bottom">
+    <div class="container py-lg-4">
+      <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+          <span class="badge bg-danger-subtle text-danger fw-bold mb-1">Partner Lenders</span>
+          <h3 class="fw-extrabold text-navy mb-0">Covered Indian Commercial Banks</h3>
+        </div>
+        <button class="btn btn-outline-dark btn-sm fw-bold" data-bs-toggle="modal" data-bs-target="#banksModal">Full Comparison Matrix →</button>
+      </div>
+
+      <div class="space-y-3">
+        {% for bank in banks %}
+        <div class="card p-3 border rounded-3 bg-light shadow-2xs mb-2">
+          <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+            <div>
+              <h6 class="fw-bold text-navy mb-0">{{ bank.name }} ({{ bank.short_name }})</h6>
+              <small class="text-muted">{{ bank.special_offer }}</small>
+            </div>
+            <div class="d-flex gap-4 small font-mono">
+              <div>Home Rate: <strong class="text-teal">{{ bank.home_loan_rate }}</strong></div>
+              <div>Min CIBIL: <strong>{{ bank.min_cibil }}+</strong></div>
+              <div>Tenure: <strong>{{ bank.max_tenure_years }} Yrs</strong></div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Clean Footer -->
+  <footer class="bg-navy text-light py-5">
+    <div class="container">
+      <div class="row g-4 pb-4 border-bottom border-secondary small">
+        <div class="col-lg-5">
+          <h5 class="fw-black text-white">Loan<span class="text-teal">AI</span></h5>
+          <p class="text-secondary pe-lg-4">Indian digital banking platform for real-time loan eligibility checking and Scikit-learn default risk prediction. Compliant with RBI guidelines.</p>
+        </div>
+        <div class="col-lg-3">
+          <h6 class="text-white fw-bold">Underwriting Tools</h6>
+          <ul class="list-unstyled text-secondary space-y-1">
+            <li><a href="#underwriting" class="text-secondary text-decoration-none">Loan Eligibility Checker</a></li>
+            <li><a href="#underwriting" class="text-secondary text-decoration-none">Scikit-Learn Risk Predictor</a></li>
+            <li><a href="#calculator" class="text-secondary text-decoration-none">EMI Amortization Forecaster</a></li>
+            <li><a href="#banks" class="text-secondary text-decoration-none">Indian Bank Benchmarks</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h6 class="text-white fw-bold">Compliance & Disclaimers</h6>
+          <p class="text-secondary small">All simulations are based on published bank benchmark schedules (RLLR/EBLR). Final sanction depends on lender KYC and credit committee discretion.</p>
+        </div>
+      </div>
+      <div class="pt-3 d-flex justify-content-between align-items-center small text-secondary">
+        <span>© 2026 LoanAI Systems. Designed for portfolio and academic presentation.</span>
+        <span>Framework: Flask + Scikit-Learn</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODALS CONTAINER -->
+
+  <!-- 1. Eligibility Modal (Mint) -->
+  <div class="modal fade" id="eligibilityModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 shadow">
+        <div class="modal-header border-bottom py-3 bg-pastel-mint">
+          <h5 class="modal-title fw-bold text-dark">Loan Eligibility Checker (RBI FOIR Standard)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="eligibilityForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Full Name</label>
+                <input type="text" class="form-control" id="elName" value="Rahul Sharma" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Employment Type</label>
+                <select class="form-select" id="elEmployment">
+                  <option value="salaried">Salaried (Corporate / Govt)</option>
+                  <option value="self_employed_professional">Self-Employed Professional (CA/Doctor)</option>
+                  <option value="self_employed_business">Self-Employed Business / MSME</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Monthly Net In-Hand Income (₹)</label>
+                <input type="number" class="form-control font-mono" id="elIncome" value="95000" step="5000" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Co-Applicant Monthly Income (₹)</label>
+                <input type="number" class="form-control font-mono" id="elCoIncome" value="35000" step="5000" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Existing Monthly EMIs (₹)</label>
+                <input type="number" class="form-control font-mono" id="elEmis" value="18000" step="1000" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Self-Reported CIBIL Score (300 - 900)</label>
+                <input type="number" class="form-control font-mono" id="elCibil" value="775" min="300" max="900" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Loan Amount Requested (₹)</label>
+                <input type="number" class="form-control font-mono" id="elAmount" value="4500000" step="50000" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Tenure (Years)</label>
+                <input type="number" class="form-control font-mono" id="elTenure" value="20" min="1" max="30" required />
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-top d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success fw-bold px-4">Evaluate Eligibility</button>
+            </div>
+          </form>
+
+          <div id="eligibilityResultBox" class="mt-4 d-none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Risk Prediction Modal (Lavender) -->
+  <div class="modal fade" id="riskModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 shadow">
+        <div class="modal-header border-bottom py-3 bg-pastel-lavender">
+          <h5 class="modal-title fw-bold text-dark">Scikit-Learn ML Loan Default Risk Predictor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="riskForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Monthly Income (₹)</label>
+                <input type="number" class="form-control font-mono" id="rkIncome" value="95000" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Loan Amount (₹)</label>
+                <input type="number" class="form-control font-mono" id="rkAmount" value="4500000" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">CIBIL Score (300-900)</label>
+                <input type="number" class="form-control font-mono" id="rkCibil" value="780" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Existing Monthly EMIs (₹)</label>
+                <input type="number" class="form-control font-mono" id="rkEmis" value="18000" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Loan Term (Years)</label>
+                <input type="number" class="form-control font-mono" id="rkTenure" value="20" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Prior Delinquency / Defaults</label>
+                <select class="form-select" id="rkDefaults">
+                  <option value="0">Clean Track Record (No Defaults)</option>
+                  <option value="1">Historical Default Flag</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-top d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary fw-bold px-4" id="btnRunPrediction">
+                Execute Prediction Model
+              </button>
+            </div>
+          </form>
+
+          <div id="riskResultBox" class="mt-4 d-none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Credit Score Modal (Yellow) -->
+  <div class="modal fade" id="creditModal" tabindex="-1">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 shadow">
+        <div class="modal-header border-bottom py-3 bg-pastel-yellow">
+          <h5 class="modal-title fw-bold text-dark">Credit Score (CIBIL) Analysis</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4 text-center">
+          <div class="alert alert-warning small py-2 text-start">
+            <strong>Self-Reported Demo Notice:</strong> Official bureau inquiries require authenticated OTP consent under RBI CICRA regulations.
+          </div>
+          <div class="my-4">
+            <h1 class="display-3 fw-black font-mono text-navy mb-0">775</h1>
+            <span class="badge bg-success-subtle text-success fw-bold px-3 py-1">Excellent Score</span>
+          </div>
+          <p class="small text-muted">5 Pillars: Repayment History 35% · Credit Utilization 30% · Vintage 15% · Mix 10% · Inquiries 10%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Banks Comparison Modal (Peach) -->
+  <div class="modal fade" id="banksModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 shadow">
+        <div class="modal-header border-bottom py-3 bg-pastel-peach">
+          <h5 class="modal-title fw-bold text-dark">Verified Indian Commercial Banks Matrix</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle small">
+              <thead class="table-light">
+                <tr>
+                  <th>Bank Name</th>
+                  <th>Home Loan Rate</th>
+                  <th>Personal Loan Rate</th>
+                  <th>Min CIBIL</th>
+                  <th>Max Tenure</th>
+                  <th>Special Offer</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for bank in banks %}
+                <tr>
+                  <td><strong>{{ bank.name }}</strong> ({{ bank.short_name }})</td>
+                  <td class="font-mono text-teal fw-bold">{{ bank.home_loan_rate }}</td>
+                  <td class="font-mono">{{ bank.personal_loan_rate }}</td>
+                  <td class="font-mono">{{ bank.min_cibil }}+</td>
+                  <td>{{ bank.max_tenure_years }} Years</td>
+                  <td class="text-muted">{{ bank.special_offer }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. History Modal (Sky Blue) -->
+  <div class="modal fade" id="historyModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 shadow">
+        <div class="modal-header border-bottom py-3 bg-pastel-sky">
+          <h5 class="modal-title fw-bold text-dark">Prediction & Appraisal History</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <small class="text-muted">Stored strictly in local browser storage.</small>
+            <button class="btn btn-outline-danger btn-sm" id="btnClearHistory">Clear All Records</button>
+          </div>
+          <div id="historyTableContainer">
+            <p class="text-muted text-center py-4 small">No prediction history yet. Run an eligibility or risk prediction to record your first entry.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom Application Script -->
+  <script src="/static/js/script.js"></script>
+</body>
+</html>
